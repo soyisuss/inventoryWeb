@@ -4,6 +4,7 @@ import { CategoriaFormsComponent } from './categoria-forms/categoria-forms.compo
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { HomeComponent } from './home/home.component';
+import { ProductoComponent } from './producto/producto.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:'/home', pathMatch:'full'},
@@ -13,4 +14,5 @@ export const routes: Routes = [
     {path: 'categorias', component:CategoriaComponent},
     {path: 'categoriaForms', component:CategoriaFormsComponent},
     {path: 'categoriaForms/:id', component:CategoriaFormsComponent},
+    {path: 'producto', component:ProductoComponent}
 ];

@@ -21,18 +21,6 @@ export class CategoriaComponent {
   constructor (private categoriaService : CategoriaService) {}
     HttpClient = inject(HttpClient);
 
-/*
-    {
-      idCategoria : 1,
-      nombreCategoria : 'Categoria 1',
-      descripcionCategoria : 'Descripcion de la categoria 1'
-    },
-    {
-      idCategoria : 2,
-      nombreCategoria : 'Categoria 2',
-      descripcionCategoria : 'Descripcion de la categoria 2'
-    },*/
-
   ngOnInit(): void {
     this.categoriaService.mostrarCategorias().subscribe((data) => {
       this.listaCategorias = data;
