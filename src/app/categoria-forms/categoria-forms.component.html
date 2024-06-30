@@ -1,0 +1,37 @@
+<div class="mt-3"></div>
+<div class="container border-success">
+    <div class="card border-primary text-primary text-center">
+        <div class="card-header">
+            <h1 class="text-center text-primary">
+                {{titulo}}
+            </h1>
+        </div>
+        <div class="card-body text-primary">
+            <div class="d-flex justify-content-center align-items-center">
+                <form>
+                    <div class="form-group mb-3">
+                        <label for="exampleInputEmail1">Id</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa el ID">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="exampleInputEmail1">Nombre de la Categoria nueva</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa el nombre" {(ngModel)}="Categoria.nombreCategoria" >
+                    
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="exampleInputPassword1">Descripcion de la categoria</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa la descripcion">
+                    </div>
+                
+                    <a href="/categorias" class="btn btn-primary">Guardar</a>
+                    
+                    <button type="button" class="btn btn-outline-dark form control"
+                    *ngIf="Categoria.idCategoria; else elseBlock">Save</button>
+                    <ng-template #elseBlock>
+                        <button type="button" class="btn btn-outline-dark form control">Actualizar</button>
+                    </ng-template>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
