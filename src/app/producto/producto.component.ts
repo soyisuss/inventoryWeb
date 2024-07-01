@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Articulo } from '../model/producto';
 import { ProductoService } from './../service/producto.service';
@@ -9,7 +9,7 @@ import { ProductoService } from './../service/producto.service';
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterModule],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })

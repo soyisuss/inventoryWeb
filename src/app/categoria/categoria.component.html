@@ -22,7 +22,7 @@
                         <td>{{categoria.nombreCategoria}}</td>
                         <td>{{categoria.descripcionCategoria}}</td>
                         <td>
-                            <button type="button" name="editar" class="btn btn-outline-dark" [routerLink] = "['/categoriaForms', categoria.idCategoria]">
+                            <button type="button" name="editar" class="btn btn-outline-dark" [routerLink]="['/categoriaForms', categoria.idCategoria]">
                                 Editar
                             </button>
                             <button type="button" name="eliminar" class="btn btn-outline-danger" (click)="delete(categoria)">
@@ -32,9 +32,7 @@
                     </tr>
                     <tr>
                             <td>
-                                <a href="/categoriaForms" name="nuevo" class="btn btn-outline-primary" >
-                                    Nuevo
-                                </a>
+                                <button type="button" name="nuevo" class="btn btn-outline-primary" routerLink="/categoriaForms">Nueva Categoria</button>
                             </td>
                     </tr>
                 </tbody>

@@ -1,1 +1,43 @@
-<p>producto-forms works!</p>
+<h2>
+    @if(producto){
+        Editar
+    } @else {
+        Crear
+    }
+    Producto
+</h2>
+
+<div class="row row-cols-3 justify-content-center">
+    @if(form){
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="mb-3">
+                <label for="nombreArticulo" class="form-label">Nombre del Producto</label>
+                <input type="text" class="form-control" id="nombreArticulo" placeholder="Nombre" formControlName="nombreArticulo">
+            </div>
+            <div class="mb-3">
+                <label for="descripcionArticulo" class="form-label">Descripcion del Producto</label>
+                <input type="text" class="form-control" id="descripcionArticulo" placeholder="Descripcion" formControlName="descripcionArticulo">
+            </div>
+            <div class="mb-3">
+                <label for="precioArticulo" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precioArticulo" placeholder="Precio" formControlName="precioArticulo">
+            </div>
+            <div class="mb-3">
+                <label for="stockArticulo" class="form-label">Stock del Producto</label>
+                <input type="number" class="form-control" id="stockArticulo" placeholder="Stock" formControlName="stockArticulo">
+            </div>
+            <div class="mb-3">
+                <label for="idCategoria" class="form-label">Id de la categoria</label>
+                <input type="number" class="form-control" id="idCategoria" placeholder="Categoria" formControlName="idCategoria">
+            </div>
+            <button type="button" class="btn btn-danger" routerLink="/producto">Cancelar</button>
+            <button class="btn btn-primary">
+                @if(producto){
+                    Editar
+                } @else {
+                    Crear
+                }
+            </button>
+        </form>
+    }
+</div>

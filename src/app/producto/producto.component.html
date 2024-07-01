@@ -28,7 +28,7 @@
                         <td>{{articulo.stockArticulo}}</td>
                         <td>{{articulo.categoriaDTO.nombreCategoria}}</td>
                         <td>
-                            <button type="button" name="editar" class="btn btn-outline-dark" [routerLink] = "['/articuloForms', articulo.idArticulo]">
+                            <button type="button" name="editar" class="btn btn-outline-dark" [routerLink]="['/productoForms', articulo.idArticulo]">
                                 Editar
                             </button>
                             <button type="button" name="eliminar" class="btn btn-outline-danger" (click)="delete(articulo)">
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                             <td>
-                                <a href="/articuloForms" name="nuevo" class="btn btn-outline-primary" >
+                                <a href="/productoForms" name="nuevo" class="btn btn-outline-primary" >
                                     Nuevo
                                 </a>
                             </td>

@@ -1,45 +1,61 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { Categoria } from './../model/Categoria';
-import { CategoriaService } from './../service/categoria.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Categoria } from '../model/Categoria';
+import { CategoriaService } from '../service/categoria.service';
 
 @Component({
   selector: 'app-categoria-forms',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './categoria-forms.component.html',
   styleUrl: './categoria-forms.component.css'
 })
-export class CategoriaFormsComponent {
-  titulo: string = 'Categoria Formulario';
-  Categoria: Categoria = new Categoria();
-
-  constructor(private categoriaService : CategoriaService, private router : Router, private rutaActiva : ActivatedRoute) {}
-
+export class CategoriaFormsComponent implements OnInit{
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private categoriaService = inject(CategoriaService);
+  private route = inject(ActivatedRoute)
+  
+  form?: FormGroup;
+  categoria?: Categoria;
+  
   ngOnInit(): void {
-    this.mostrarCategoria();
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if(id){
+      
+    this.categoriaService.mostrarCategoria(parseInt(id))
+      .subscribe(categoria => {
+        this.categoria = categoria;
+        this.form = this.fb.group({
+          idCategoria: [parseInt(id)],
+          nombreCategoria: [categoria.nombreCategoria, Validators.required],
+          descripcionCategoria: [categoria.descripcionCategoria, Validators.required]
+        });
+      });
+    } else {
+      this.form = this.fb.group({
+        nombreCategoria: ['', Validators.required],
+        descripcionCategoria: ['', Validators.required]
+      });
+    }
+
   }
+  
+  
 
-  mostrarCategoria(): void {
-    this.rutaActiva.params.subscribe((params) => {
-      let id = params['id'];
-      if (id) {
-        this.categoriaService.mostrarCategoria(id).subscribe((data) => this.Categoria = data);
-      }
-    });
+  save(){
+
+    const categoriaForm = this.form!.value as unknown as Categoria; 
+
+    if(this.categoria){
+      this.categoriaService.actualizarCategoria(categoriaForm).subscribe(() => {this.router.navigate(['/categorias']);});
+    } else {
+      this.categoriaService.crearCategoria(categoriaForm).subscribe(() => {this.router.navigate(['/categorias']);});
+    }
+    
   }
-
-  registrarCategoria(): void {
-    this.categoriaService.crearCategoria(this.Categoria).subscribe((response) => this.router.navigate(['/categorias']));
-    Swal.fire('Nueva Categoria', `Categoria ${this.Categoria.nombreCategoria} creada con exito`, 'success');
-  }
-
-  actualizarCategoria(): void {
-    Swal.fire('actualizado'); 
-  }
-
-
 }
 
